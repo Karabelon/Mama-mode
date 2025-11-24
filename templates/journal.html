@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Journal</h2>
+<p>Write a note for today:</p>
+<form method="post">
+  {% csrf_token %}
+  <textarea rows="6" placeholder="Baby smiled today..."></textarea>
+  <button type="submit">Save</button>
+</form>
+{% endblock %}
+
+

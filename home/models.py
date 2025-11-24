@@ -16,4 +16,3 @@ class BabyActivity(models.Model):
     def __str__(self):
         return f"{self.activity_type} at {self.time}"
 
-

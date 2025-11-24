@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Baby Tracker</h2>
+
+<section class="tabs">
+  <button class="tab active">Tracker</button>
+  <button class="tab">Activity Log</button>
+  <button class="tab">Tips & Help</button>
+</section>
+
+<section class="stats">
+  <div class="stat"><div class="num">0</div><div>Feedings</div></div>
+  <div class="stat"><div class="num">0</div><div>Sleep</div></div>
+  <div class="stat"><div class="num">0</div><div>Diapers</div></div>
+</section>
+
+<section class="quick-actions">
+  <button>+ Feeding</button>
+  <button>+ Sleep</button>
+  <button>+ Diaper</button>
+</section>
+{% endblock %}
+

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Baby Vaccine Reminders</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    <label>Event Name</label>
+    <input type="text" name="event_name" required>
+
+    <label>Date</label>
+    <input type="date" name="date" required>
+
+    <label>Notes</label>
+    <textarea name="details"></textarea>
+
+    <button type="submit">Create Reminder</button>
+</form>
+
+{% if google_calendar_url %}
+    <p>Click below to add to Google Calendar:</p>
+    <a href="{{ google_calendar_url }}" target="_blank">Add to Google Calendar</a>
+{% endif %}
+
+<h3>Saved Reminders</h3>
+<ul>
+    {% for r in reminders %}
+    <li>{{ r.event_name }} — {{ r.date }} — {{ r.details }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}
+

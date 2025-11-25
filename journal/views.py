@@ -1,19 +1,21 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import JournalEntry
 
 def journal_page(request):
     if request.method == "POST":
-        title = request.POST["title"]
-        content = request.POST["content"]
+        title = request.POST.get('title', '').strip()
+        content = request.POST.get('content', '').strip()
 
-        JournalEntry.objects.create(
-            title=title,
-            content=content
-        )
+       
+        if title or content:
+            JournalEntry.objects.create(title=title, content=content)
 
-    entries = JournalEntry.objects.order_by("-created_at")
+       
+        return redirect('journal')
 
-    return render(request, "journal.html", {
-        "entries": entries
-    })
+
+    entries = JournalEntry.objects.all().order_by('-id') 
+
+    return render(request, "journal.html", {"entries": entries})
+
 

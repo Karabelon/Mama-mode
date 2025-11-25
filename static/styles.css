@@ -499,3 +499,503 @@ body {
 
 
 
+
+
+/*/*-----------------------------Baby Tracker----------------------------------------------------------------*/
+:root {
+    --primary-pink: #b67a4f; /* Example: Hot Pink */
+    --light-pink: #fcf0c9;
+    --card-bg: white;
+    --text-color: #black;
+    --light-text: #666;
+}
+
+.baby-tracker-container {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr; /* Quick Track & Summary on left, Log on right */
+    gap: 30px;
+    padding-top: 20px;
+}
+
+/* Card Styling */
+.card {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+    margin-bottom: 25px;
+}
+
+/* Today's Summary Section */
+.summary-stats {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.stat-item h3 {
+    font-size: 3em;
+    color: #fcf0c9;
+    margin: 0;
+}
+
+.stat-item p {
+    font-size: 0,9em;
+    color: var(--light-text);
+   
+}
+
+/* Quick Track Section */
+.quick-track-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.quick-track-item:last-child {
+    border-bottom: none;
+}
+
+.quick-track-item button {
+    background-color: #fcf0c9;
+    color: #b67a4f;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+/* Activity Log Section */
+.activity-log-list {
+    list-style: none;
+    padding: 0;
+}
+
+.activity-log-item {
+    padding: 10px 0;
+    border-bottom: 1px dashed #eee;
+    font-size: 0.9em;
+}
+
+.activity-log-item strong {
+    color: #b67a4f;
+}
+h1.logo { 
+            color: #b67a4f; border-bottom: 2px solid #eee; padding-bottom: 10px; 
+}
+/*--------------------------------Baby Tracker-------------------------------------------------------------*/
+/*--------------------------------Journal-----------------------------------------------------------------------*/
+.journal-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Spacing between form elements */
+    padding: 20px;
+    background-color: var(--card-bg); /* Use the white card background */
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+}
+
+.journal-container input[type="text"],
+.journal-container textarea {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1em;
+    font-family: inherit; /* Use the body font */
+    transition: border-color 0.3s;
+}
+
+.journal-container input[type="text"]:focus,
+.journal-container textarea:focus {
+    border-color: var(--primary-pink); /* Highlight pink on focus */
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 105, 180, 0.2);
+}
+
+.journal-container textarea {
+    min-height: 200px; /* Ample space for writing */
+    resize: vertical;
+}
+
+/* Style the Save button */
+.journal-container button[type="submit"] {
+    background-color: var(--primary-pink);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.1s;
+}
+
+.journal-container button[type="submit"]:hover {
+    background-color: #fcf0c9; 
+    transform: translateY(-1px);
+}
+
+/* Style for the Previous Entries List */
+.journal-entries {
+    list-style: none;
+    padding: 0;
+}
+
+.journal-entries li {
+    background-color: var(--card-bg);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    margin-bottom: 15px;
+    border-left: 5px solid var(--light-pink); /* A subtle accent color */
+}
+
+.journal-entries strong {
+    font-size: 1.2em;
+    color: var(--text-color);
+    display: block; /* Make title take full width */
+    margin-bottom: 5px;
+}
+
+.journal-entries small {
+    color: var(--light-text);
+    display: block;
+    margin-bottom: 10px;
+    font-style: italic;
+}
+
+.journal-entries p {
+    margin-top: 10px;
+    line-height: 1.6;
+    color: var(--light-text);
+}
+
+.journal-entries hr {
+    margin: 30px 0;
+    border: 0;
+    border-top: 1px solid #eee;
+}
+
+
+@media (max-width: 600px) {
+    .journal-container form {
+        padding: 15px;
+        gap: 10px;
+    }
+
+    .journal-container input[type="text"],
+    .journal-container textarea,
+    .journal-container button[type="submit"] {
+        padding: 10px;
+        font-size: 0.95em;
+    }
+    
+    .journal-entries li {
+        padding: 15px;
+        margin-bottom: 10px;
+    }
+}
+
+/*---------------------------------Journal---------------------------------------------------------------------*/
+/*----------------------------------Reminder---------------------------------------------------------------------------*/
+.reminders-container {
+    padding: 10px 0;
+}
+
+.reminders-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 25px;
+    background-color: var(--card-bg); 
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+}
+
+
+.reminders-container label {
+    font-weight: bold;
+    color: #070707;
+    margin-top: 5px;
+}
+
+
+.reminders-container input[type="text"],
+.reminders-container input[type="date"],
+.reminders-container textarea {
+    padding: 12px;
+    border: 1px solid #b67a4f;
+    border-radius: 8px;
+    font-size: 1em;
+    font-family: inherit;
+    transition: border-color 0.3s;
+}
+
+.reminders-container input[type="text"]:focus,
+.reminders-container input[type="date"]:focus,
+.reminders-container textarea:focus {
+    border-color: #080807; 
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 105, 180, 0.2);
+}
+
+.reminders-container textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+
+.reminders-container button[type="submit"] {
+    background-color: var(--primary-pink);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.1s;
+    margin-top: 10px;
+}
+
+.reminders-container button[type="submit"]:hover {
+    background-color: #b67a4f;
+    transform: translateY(-1px);
+}
+
+
+.reminders-container a[target="_blank"] {
+    display: inline-block;
+    background-color: #4285f4; 
+    color: white;
+    padding: 8px 15px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 10px 0 20px 0;
+    transition: background-color 0.3s;
+}
+
+.reminders-container a[target="_blank"]:hover {
+    background-color: #357ae8;
+}
+
+
+.saved-reminders-list {
+    list-style: none;
+    padding: 0;
+}
+
+.saved-reminders-list li {
+    background-color: #b67a4f;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    margin-bottom: 10px;
+    border-left: 5px solid #fcf0c9;
+    line-height: 1.5;
+    color: var(--text-color);
+}
+
+
+@media (max-width: 600px) {
+    .reminders-container form {
+        padding: 15px;
+        gap: 10px;
+    }
+
+    .reminders-container input,
+    .reminders-container textarea,
+    .reminders-container button[type="submit"] {
+        padding: 10px;
+        font-size: 0.95em;
+    }
+    
+    .saved-reminders-list li {
+        padding: 12px;
+        font-size: 0.9em;
+    }
+}
+/*----------------------------------Reminder---------------------------------------------------------------------------*/
+/*-----------------------------------Chatbot----------------------------------------------------------------------------------*/
+.chatbot-container {
+    display: flex;
+    flex-direction: column;
+    height: 60vh; 
+    max-height: 700px;
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    overflow: hidden; 
+}
+
+.chat-history-box {
+    flex-grow: 1; 
+    padding: 20px;
+    overflow-y: auto;
+    border-bottom: 1px solid #eee;
+    background-color: #b67a4f;
+}
+
+
+.chat-message {
+    padding: 10px 15px;
+    border-radius: 18px;
+    max-width: 80%;
+    margin-bottom: 10px;
+    line-height: 1.5;
+    font-size: 0.95em;
+}
+
+.bot-message {
+    background-color: #fcf0c9; 
+    color: var(--text-color);
+    margin-right: auto;
+    border-top-left-radius: 4px;
+}
+
+.user-message {
+    background-color: #b67a4f; 
+    color: black;
+    margin-left: auto;
+    border-top-right-radius: 4px;
+}
+
+.chat-message p {
+    margin: 0;
+}
+
+/* Input Form Area */
+#chat-form {
+    padding: 15px 20px;
+    border-top: 1px solid #eee;
+    background-color: var(--card-bg);
+}
+
+.chat-input-area {
+    display: flex;
+    gap: 10px;
+}
+
+#user-message {
+    flex-grow: 1;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    font-size: 1em;
+    font-family: inherit;
+    transition: border-color 0.3s;
+}
+
+#user-message:focus {
+    border-color: #fcf0c9;
+    outline: none;
+}
+
+#send-button {
+    background-color: var(--primary-pink);
+    color: white;
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%; 
+    cursor: pointer;
+    font-size: 1.2em;
+    transition: background-color 0.2s, transform 0.1s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#send-button:hover {
+    background-color: #fcf0c9;
+}
+
+.send-icon {
+
+    transform: translateX(1px); 
+}
+
+
+
+@media (max-width: 600px) {
+    .chatbot-container {
+        height: 70vh; 
+    }
+
+    .chat-history-box {
+        padding: 15px;
+    }
+    
+    .chat-message {
+        padding: 8px 12px;
+        font-size: 0.9em;
+    }
+
+    #chat-form {
+        padding: 10px 15px;
+    }
+    
+    #user-message {
+        padding: 10px;
+    }
+    
+    #send-button {
+        width: 40px;
+        height: 40px;
+    }
+}
+/*------------------------------------Chatbot---------------------------------------------------------------------------------*/
+
+body { 
+    font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: black;
+ }    
+    .header nav {
+    padding: 10px 20px;
+    display: flex;
+    position: sticky;
+    align-items: center;
+    justify-content: center;
+    gap: 5.5rem;
+    color: #b67a4f;
+    background-color: #fcf0c9;
+    text-align: center;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+}
+ .nav{
+ display: block;
+ background-color: #fcf0c9;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+        }
+            
+        nav a { 
+            color:#b67a4f ; text-decoration: none; margin-right: 10px; font-weight: bold; margin-bottom: 5px; font-size: 0.9rem;
+         }
+        nav a:hover { 
+            text-decoration: underline;
+         }
+        .content {
+             padding: 10px; max-width: 800px; margin: auto; background-color:#b67a4f ; min-height: 80vh; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
+            }
+        h1 { 
+            color: #040200; border-bottom: 2px solid #eee; padding-bottom: 10px; 
+        }
+        .hero { 
+            text-align: center; background-color: #fcf0c9; padding: 40px; margin-bottom: 20px; border-radius: 8px;
+         }
+        .hero h2 {
+             color: #b67a4f; 
+            } Styling */

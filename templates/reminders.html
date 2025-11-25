@@ -30,3 +30,42 @@
 </ul>
 {% endblock %}
 
+
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>🗓️ Reminders</h2>
+ <div class="reminders-container"> <form method="POST">
+            {% csrf_token %}
+            <label for="id_event_name">Event Name</label>
+            <input type="text" id="id_event_name" name="event_name" required>
+
+            <label for="id_date">Date</label>
+            <input type="date" id="id_date" name="date" required>
+
+            <label for="id_details">Notes</label>
+            <textarea id="id_details" name="details"></textarea>
+
+            <button type="submit">Create Reminder</button>
+        </form>
+
+        {% if google_calendar_url %}
+            <p>Click below to add to Google Calendar:</p>
+            <a href="{{ google_calendar_url }}" target="_blank">Add to Google Calendar</a>
+        {% endif %}
+
+        <h3>Saved Reminders</h3>
+        <ul class="saved-reminders-list"> {% for r in reminders %}
+            <li>
+                <strong>{{ r.event_name }}</strong> &mdash; 
+                <small>{{ r.date|date:"d M Y" }}</small>
+                {% if r.details %}<br>{{ r.details }}{% endif %}
+            </li>
+            {% empty %}
+                <li>No reminders saved yet.</li>
+            {% endfor %}
+        </ul>
+        
+    </div> {% endblock %}
+
+

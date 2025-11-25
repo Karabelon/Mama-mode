@@ -15,10 +15,14 @@
 
 <ul>
     {% for e in entries %}
-        <li>
-            <strong>{{ e.title }}</strong><br>
-            {{ e.content }}
-        </li>
+     <li>
+    <strong>{{ e.title }}</strong>
+    <br>
+    <small>{{ e.created_at|date:"d M Y" }}</small>
+    <br>
+    {{ e.content }}
+</li>
+  
     {% empty %}
         <li>No entries yet.</li>
     {% endfor %}

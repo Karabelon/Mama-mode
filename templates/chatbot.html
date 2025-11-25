@@ -24,5 +24,38 @@
 {% endblock content %}
 
 {% block scripts %}
+
+
+
+
+{% extends 'base.html' %}
+{%load static%}
+{% block content %}
+    <h1>🤖 Chatbot Support</h1>
+    <p>Need support or just want to chat? Ask me anything about new motherhood!</p>
+    <div class="chatbot-container">
+        <div id="chat-history" class="chat-history-box">
+            <div class="chat-message bot-message">
+                <p>Hello, new mama! I'm here to listen and offer support. How can I help you navigate your day today?</p>
+            </div>
+            </div>
+
+        <form id="chat-form" method="POST" action="{% url 'send_chat_message' %}">
+            {% csrf_token %}
+            <div class="chat-input-area">
+                <input type="text" id="user-message" name="message" placeholder="Type your message here..." required autocomplete="off">
+                <button type="submit" id="send-button">
+                    <span class="send-icon">➤</span>
+                </button>
+            </div>
+        </form>
+    </div>
+
+{% endblock content %}
+
+{% block scripts %}
     <script src="{% static 'track.js' %}"></script>
 {% endblock scripts %}
+    <script src="{% static 'track.js' %}"></script>
+{% endblock scripts %}
+

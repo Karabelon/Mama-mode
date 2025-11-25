@@ -127,3 +127,209 @@
     </body>
     </html>
 
+
+{% extends 'base.html' %}
+{%load static%}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page_title }} Mama Mode</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}"> 
+    <script src="{% static 'track.js' %}"></script>
+    </head>
+    <body>
+    <h1>👶 Baby Tracker</h1>
+    <p class="subtitle">Track your baby's daily activities</p>
+    <div class="baby-tracker-container">
+        <div class="left-panel">
+            
+            <div class="card summary-card">
+                <h2>Today's Summary</h2>
+                <p class="light-text">Quick overview of your baby's day</p>
+                <div class="summary-stats">
+                    <div class="stat-item">
+                        <h3>{{ feeding_count }}</h3>
+                        <p>Feedings</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>{{ sleep_count }}</h3>
+                        <p>Sleep</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>{{ diaper_count }}</h3>
+                        <p>Diapers</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card quick-track-card">
+                <h2>Quick Track</h2>
+                <p class="light-text">Log baby activities</p>
+
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="quick-track-item">
+                        <span>Feeding</span>
+                        <input type="hidden" name="activity_type" value="FEEDING">
+                        <button type="submit">+</button>
+                    </div>
+                </form>
+
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="quick-track-item">
+                        <span>Sleep</span>
+                        <input type="hidden" name="activity_type" value="SLEEP">
+                        <button type="submit">+</button>
+                    </div>
+                </form>
+
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="quick-track-item">
+                        <span>Diaper Change</span>
+                        <input type="hidden" name="activity_type" value="DIAPER">
+                        <button type="submit">+</button>
+                    </div>
+                </form>
+                
+            </div>
+            
+        </div>
+
+        <div class="right-panel">
+            <div class="card activity-log-card">
+                <h2>Activity Log</h2>
+                {% if activity_log %}
+                    <ul class="activity-log-list">
+                        {% for activity in activity_log %}
+                            <li class="activity-log-item">
+                                <strong>{{ activity.get_activity_type_display }}</strong> 
+                                logged at {{ activity.timestamp|date:"H:i" }} on {{ activity.timestamp|date:"M d" }}
+                                {% if activity.measurement and activity.unit != 'Quick' %}
+                                    - {{ activity.measurement }} {{ activity.unit }}
+                                {% endif %}
+                                {% if activity.notes %}
+                                    <br><small>{{ activity.notes }}</small>
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <div style="text-align: center; padding: 50px;">
+                                                <p class="light-text">No activities logged yet. Start tracking using the buttons on the left.</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+    </body>
+    </html>
+
+
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page_title }} Mama Mode</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}"> 
+    <script src="{% static 'track.js' %}"></script>
+    </head>
+    <body>
+    <h1>👶 Baby Tracker</h1>
+    <p class="subtitle">Track your baby's daily activities</p>
+    <div class="baby-tracker-container">
+        <div class="left-panel">
+            
+            <div class="card summary-card">
+                <h2>Today's Summary</h2>
+                <p class="light-text">Quick overview of your baby's day</p>
+                <div class="summary-stats">
+                    <div class="stat-item">
+                        <h3>{{ feeding_count }}</h3>
+                        <p>Feedings</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>{{ sleep_count }}</h3>
+                        <p>Sleep</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>{{ diaper_count }}</h3>
+                        <p>Diapers</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card quick-track-card">
+                <h2>Quick Track</h2>
+                <p class="light-text">Log baby activities</p>
+
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="quick-track-item">
+                        <span>Feeding</span>
+                        <input type="hidden" name="activity_type" value="FEEDING">
+                        <button type="submit">+</button>
+                    </div>
+                </form>
+
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="quick-track-item">
+                        <span>Sleep</span>
+                        <input type="hidden" name="activity_type" value="SLEEP">
+                        <button type="submit">+</button>
+                    </div>
+                </form>
+
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="quick-track-item">
+                        <span>Diaper Change</span>
+                        <input type="hidden" name="activity_type" value="DIAPER">
+                        <button type="submit">+</button>
+                    </div>
+                </form>
+                
+            </div>
+            
+        </div>
+
+        <div class="right-panel">
+            <div class="card activity-log-card">
+                <h2>Activity Log</h2>
+                {% if activity_log %}
+                    <ul class="activity-log-list">
+                        {% for activity in activity_log %}
+                            <li class="activity-log-item">
+                                <strong>{{ activity.get_activity_type_display }}</strong> 
+                                logged at {{ activity.timestamp|date:"H:i" }} on {{ activity.timestamp|date:"M d" }}
+                                {% if activity.measurement and activity.unit != 'Quick' %}
+                                    - {{ activity.measurement }} {{ activity.unit }}
+                                {% endif %}
+                                {% if activity.notes %}
+                                    <br><small>{{ activity.notes }}</small>
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <div style="text-align: center; padding: 50px;">
+                                                <p class="light-text">No activities logged yet. Start tracking using the buttons on the left.</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+    </body>
+    </html>
+

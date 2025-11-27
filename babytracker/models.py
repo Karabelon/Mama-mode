@@ -1,19 +1,20 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class BabyActivity(models.Model):
     ACTIVITY_TYPES = [
-        ('feeding', 'Feeding'),
-        ('diaper', 'Diaper Change'),
-        ('sleep', 'Sleep'),
-        ('bath', 'Bath'),
+        ("feeding", "Feeding"),
+        ("sleep", "Sleep"),
+        ("diaper", "Diaper Change"),
+        ("milestone", "Milestone"),
+        ("other", "Other"),
     ]
 
-    activity_type = models.CharField(max_length=20, choices=ACTIVITY_TYPES)
-    time = models.DateTimeField()
-    notes = models.TextField(blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    activity_type = models.CharField(max_length=50, choices=ACTIVITY_TYPES)
+    description = models.TextField(null=True, blank=True)
+    timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.activity_type} at {self.time}"
-
+        return self.activity_type
 

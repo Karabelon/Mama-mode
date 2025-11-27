@@ -12,7 +12,9 @@
     <input type="date" name="date" required>
 
     <label>Notes</label>
-    <textarea name="details"></textarea>
+    <textarea name="notes"></textarea>
+
+
 
     <button type="submit">Create Reminder</button>
 </form>
@@ -23,10 +25,22 @@
 {% endif %}
 
 <h3>Saved Reminders</h3>
+
 <ul>
-    {% for r in reminders %}
-    <li>{{ r.event_name }} — {{ r.date }} — {{ r.details }}</li>
-    {% endfor %}
+  {% for r in reminders %}
+    <li>
+        {{ r.event_name }} — {{ r.date }} — {{ r.notes }}
+
+        <form action="{% url 'delete_reminder' r.id %}" method="POST" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" style="color:red; background:none; border:none; cursor:pointer;">
+                Delete
+            </button>
+        </form>
+    </li>
+{% endfor %}
+ 
 </ul>
+
 {% endblock %}
 

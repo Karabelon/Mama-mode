@@ -2,7 +2,8 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path("", views.tracker, name="babytracker"),
+    path("", views.babytracker, name="babytracker"),
+    path("delete/<int:id>/", views.delete_activity, name="delete_activity"),
 ]
 
 

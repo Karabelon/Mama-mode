@@ -1,21 +1,31 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import JournalEntry
+from django.contrib.auth.decorators import login_required
 
-def journal_page(request):
+@login_required
+def journal(request):
     if request.method == "POST":
-        title = request.POST.get('title', '').strip()
-        content = request.POST.get('content', '').strip()
+        title = request.POST.get('title')
+        content = request.POST.get('content')
 
-       
-        if title or content:
-            JournalEntry.objects.create(title=title, content=content)
+        if title and content:
+            JournalEntry.objects.create(
+                user=request.user,
+                title=title,
+                content=content
+            )
+            return redirect('journal')
 
-       
-        return redirect('journal')
+    entries = JournalEntry.objects.filter(user=request.user)
+    return render(request, 'journal.html', {"entries": entries})
 
 
-    entries = JournalEntry.objects.all().order_by('-id') 
+@login_required
+def delete_entry(request, id):
+    entry = get_object_or_404(JournalEntry, id=id, user=request.user)
+    entry.delete()
+    return redirect('journal')
 
-    return render(request, "journal.html", {"entries": entries})
+
 
 

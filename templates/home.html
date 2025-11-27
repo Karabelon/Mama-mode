@@ -1,20 +1,32 @@
 {% extends 'base.html' %}
+
 {% block content %}
-<h1>💖 Welcome, New Mama! 💖 </h1>
-<p>You're doing an amazing job. This app is here to support you on your beautiful journey. Navigate the tabs above for tracking, reflection, organization, and a little bit of helpful conversation!</p>
+<h1>💖 Welcome, New Mama! 💖</h1>
+
+{% if request.user.is_authenticated %}
+    <p style="font-size: 20px; font-weight: 600;">
+    Hello, {{ request.user.username }} 👶💗
+    </p>
+{% endif %}
+
+<p>You're doing an amazing job.</p>
 
 <section class="card-grid">
-  <a class="card" href="{% url 'babytracker' %}">
-    <h3>Baby Tracker</h3><p>Feedings, sleep, diapers</p>
-  </a>
-  <a class="card" href="{% url 'journal' %}">
-    <h3>Journal</h3><p>Your memories & milestones</p>
-  </a>
-  <a class="card" href="{% url 'reminders' %}">
-    <h3>Reminders</h3><p>Clinic visits & vaccines</p>
-  </a>
-  <a class="card" href="{% url 'chatbot' %}">
-    <h3>Chatbot</h3><p>Ask for tips & help</p>
-  </a>
+    <a class="card" href="{% url 'babytracker' %}">
+        <h3>Baby Tracker</h3><p>Feedings, sleep, diapers</p>
+    </a>
+
+    <a class="card" href="{% url 'journal' %}">
+        <h3>Journal</h3><p>Your memories & milestones</p>
+    </a>
+
+    <a class="card" href="{% url 'reminders' %}">
+        <h3>Reminders</h3><p>Clinic visits & vaccines</p>
+    </a>
+
+    <a class="card" href="{% url 'chatbot' %}">
+        <h3>Chatbot</h3><p>Ask for tips & help</p>
+    </a>
 </section>
 {% endblock %}
+

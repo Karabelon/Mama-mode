@@ -18,8 +18,17 @@
             <li class="journal-entry-item"> 
                 <strong>{{ e.title }}</strong>
                 <br>
-                <small>{{ e.date_created|date:"d M Y" }}</small>
+                <small>{{ e.created_at|date:"d M Y" }}</small>
                 <p>{{ e.content }}</p>
+
+                 <form action="{% url 'delete_entry' e.id %}" method="POST" style="display:inline;">
+ 
+                {% csrf_token %}
+                <button type="submit" style="color:red; border:none; background:none; cursor:pointer;">
+                    Delete
+                </button>
+            </form>
+
             </li>
             {% empty %}
                 <li>No entries yet. Start writing your first memory!</li>

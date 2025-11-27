@@ -43,4 +43,94 @@
 
 
 
+=======
+<ul>
+    {% for e in entries %}
+     <li>
+    <strong>{{ e.title }}</strong>
+    <br>
+    <small>{{ e.created_at|date:"d M Y" }}</small>
+    <br>
+    {{ e.content }}
+</li>
+  
+    {% empty %}
+        <li>No entries yet.</li>
+    {% endfor %}
+</ul>
 
+
+
+
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>✍️ Journal</h1>
+    <div class="journal-container"> 
+        <p>A space for reflection. Write down your feelings, triumphs, and memories.</p>
+
+        <form method="POST">
+            {% csrf_token %}
+            <input type="text" name="title" placeholder="Entry title">
+            <textarea name="content" placeholder="Write your entry..."></textarea>
+            <button type="submit">Save</button>
+        </form>
+
+        <h2>Previous Entries</h2>
+        <ul class="journal-entries"> 
+            {% for e in entries %}
+            <li class="journal-entry-item"> 
+                <strong>{{ e.title }}</strong>
+                <br>
+                <small>{{ e.date_created|date:"d M Y" }}</small>
+                <p>{{ e.content }}</p>
+            </li>
+            {% empty %}
+                <li>No entries yet. Start writing your first memory!</li>
+            {% endfor %}
+        </ul>
+    </div> 
+{% endblock content %}
+
+
+
+{% endblock %}
+
+
+
+
+
+
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>✍️ Journal</h1>
+    <div class="journal-container"> 
+        <p>A space for reflection. Write down your feelings, triumphs, and memories.</p>
+
+        <form method="POST">
+            {% csrf_token %}
+            <input type="text" name="title" placeholder="Entry title">
+            <textarea name="content" placeholder="Write your entry..."></textarea>
+            <button type="submit">Save</button>
+        </form>
+
+        <h2>Previous Entries</h2>
+        <ul class="journal-entries"> 
+            {% for e in entries %}
+            <li class="journal-entry-item"> 
+                <strong>{{ e.title }}</strong>
+                <br>
+                <small>{{ e.date_created|date:"d M Y" }}</small>
+                <p>{{ e.content }}</p>
+            </li>
+            {% empty %}
+                <li>No entries yet. Start writing your first memory!</li>
+            {% endfor %}
+        </ul>
+    </div> 
+{% endblock content %}
+
+
+
+{% endblock %}

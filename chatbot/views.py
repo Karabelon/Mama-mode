@@ -7,7 +7,7 @@ from django.db.models import Count
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import google.generativeai as genai
-from .models import BabyActivity, JournalEntry, ChatMessage
+from .models import ChatMessage
 import json
 
 genai.configure(api_key="AIzaSyCSgiktsISLyqa2qbnep7vktoSxxuH4MvM")
@@ -42,5 +42,5 @@ def send_chat_message(request):
 
     return JsonResponse({"success": False, "response": "Invalid request"})
 
-#  BABY TRACKER
+
 

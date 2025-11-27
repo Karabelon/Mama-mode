@@ -1,7 +1,5 @@
 from django.db import models
 
-# Create your models here.
-
 class ChatMessage(models.Model):
     message = models.TextField()
     response = models.TextField()
@@ -9,3 +7,4 @@ class ChatMessage(models.Model):
 
     def __str__(self):
         return self.message[:40]
+

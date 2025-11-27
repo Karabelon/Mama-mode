@@ -1,61 +1,45 @@
-{% extends 'base.html' %}
-{%load static%}
-{% block content %}
-    <h1>🤖 Chatbot Support</h1>
-    <p>Need support or just want to chat? Ask me anything about new motherhood!</p>
-    <div class="chatbot-container">
-        <div id="chat-history" class="chat-history-box">
-            <div class="chat-message bot-message">
-                <p>Hello, new mama! I'm here to listen and offer support. How can I help you navigate your day today?</p>
-            </div>
-            </div>
+from django.shortcuts import render, redirect
+from django.conf import settings
+from django.contrib.auth.decorators import login_required
+from django.utils import timezone
+from django.db.models import Count
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import google.generativeai as genai
+from .models import BabyActivity, JournalEntry, ChatMessage
+import json
 
-        <form id="chat-form" method="POST" action="{% url 'send_chat_message' %}">
-            {% csrf_token %}
-            <div class="chat-input-area">
-                <input type="text" id="user-message" name="message" placeholder="Type your message here..." required autocomplete="off">
-                <button type="submit" id="send-button">
-                    <span class="send-icon">➤</span>
-                </button>
-            </div>
-        </form>
-    </div>
+genai.configure(api_key="AIzaSyCSgiktsISLyqa2qbnep7vktoSxxuH4MvM")
 
-{% endblock content %}
+model = genai.GenerativeModel('gemini-2.5-flash')
 
-{% block scripts %}
+#  CHATBOT
+
+def chatbot(request):
+    return render(request, "chatbot.html")
 
 
+def generate_bot_response(message):
+    try:
+        response = model.generate_content(message)
+        return response.text
+    except Exception as e:
+        print("Gemini error:", e)
+        return "There was an issue processing your message."
 
 
-{% extends 'base.html' %}
-{%load static%}
-{% block content %}
-    <h1>🤖 Chatbot Support</h1>
-    <p>Need support or just want to chat? Ask me anything about new motherhood!</p>
-    <div class="chatbot-container">
-        <div id="chat-history" class="chat-history-box">
-            <div class="chat-message bot-message">
-                <p>Hello, new mama! I'm here to listen and offer support. How can I help you navigate your day today?</p>
-            </div>
-            </div>
+@csrf_exempt
+def send_chat_message(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        user_message = data.get("message", "")
 
-        <form id="chat-form" method="POST" action="{% url 'send_chat_message' %}">
-            {% csrf_token %}
-            <div class="chat-input-area">
-                <input type="text" id="user-message" name="message" placeholder="Type your message here..." required autocomplete="off">
-                <button type="submit" id="send-button">
-                    <span class="send-icon">➤</span>
-                </button>
-            </div>
-        </form>
-    </div>
+        bot_reply = generate_bot_response(user_message)
 
-{% endblock content %}
+        ChatMessage.objects.create(message=user_message, response=bot_reply)
 
-{% block scripts %}
-    <script src="{% static 'track.js' %}"></script>
-{% endblock scripts %}
-    <script src="{% static 'track.js' %}"></script>
-{% endblock scripts %}
+        return JsonResponse({"success": True, "response": bot_reply})
+
+    return JsonResponse({"success": False, "response": "Invalid request"})
+
 

@@ -10,7 +10,7 @@ import google.generativeai as genai
 from .models import ChatMessage
 import json
 
-genai.configure(api_key="AIzaSyCSgiktsISLyqa2qbnep7vktoSxxuH4MvM")
+genai.configure(api_key="")
 
 model = genai.GenerativeModel('gemini-2.5-flash')
 

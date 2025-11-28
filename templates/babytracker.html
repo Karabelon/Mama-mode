@@ -1,24 +1,42 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h2>Baby Activity Tracker</h2>
+<link rel="stylesheet" href="{% static 'styles.css' %}"> 
+ <script src="{% static 'track.js' %}"></script>
+<h1>👶Baby Activity Tracker</h1>
+<p class="subtitle">Track your baby's daily activities</p>
 
-<form method="POST">
-    {% csrf_token %}
+  <div class="card quick-track-card">
+                <h2>Quick Track</h2>
+                <p class="light-text">Log baby activities</p>
 
-    <label>Activity Type</label>
-    <select name="activity_type" required>
-        <option value="feeding">Feeding</option>
-        <option value="sleep">Sleep</option>
-        <option value="diaper">Diaper Change</option>
-        <option value="other">Other</option>
-    </select>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="quick-track-item">
+                        <span>Feeding</span>
+                        <input type="hidden" name="activity_type" value="FEEDING">
+                        <button type="submit">+</button>
+                    </div>
+                </form>
 
-    <label>Description</label>
-    <textarea name="description" required></textarea>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="quick-track-item">
+                        <span>Sleep</span>
+                        <input type="hidden" name="activity_type" value="SLEEP">
+                        <button type="submit">+</button>
+                        </form>
 
-    <button type="submit">Add Activity</button>
-</form>
+                  <form method="post">
+                    {% csrf_token %}
+                    <div class="quick-track-item">
+                        <span>Diaper Change</span>
+                        <input type="hidden" name="activity_type" value="SLEEP">
+                        <button type="submit">+</button>
+                        </form>
+
+                    </div>
+
 
 <h3>Logged Activities</h3>
 <ul>
@@ -54,11 +72,8 @@
 {%load static%}
 
 {% block content %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  
     <title>{{ page_title }} Mama Mode</title>
     <link rel="stylesheet" href="{% static 'styles.css' %}"> 
     <script src="{% static 'track.js' %}"></script>
@@ -77,10 +92,12 @@
                         <h3>{{ feeding_count }}</h3>
                         <p>Feedings</p>
                     </div>
+
                     <div class="stat-item">
                         <h3>{{ sleep_count }}</h3>
                         <p>Sleep</p>
                     </div>
+                    
                     <div class="stat-item">
                         <h3>{{ diaper_count }}</h3>
                         <p>Diapers</p>
